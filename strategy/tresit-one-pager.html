@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tresit - Transformación Digital Integral</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #00D9A8;
+            --primary-yellow: #FFD166;
+            --dark-bg: #0F1419;
+            --dark-card: #1A1F26;
+            --text-light: #E8E8E8;
+            --text-grey: #9CA3AF;
+            --border-color: #2D3748;
+            --white: #FFFFFF;
+            --spacing-sm: 16px;
+            --spacing-md: 24px;
+            --spacing-lg: 32px;
+            --spacing-xl: 48px;
+            --spacing-2xl: 64px;
+            --spacing-3xl: 96px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Light Mode */
+        body {
+            --bg-primary: #F6F3EC;
+            --bg-secondary: #FFFFFF;
+            --bg-card: #FFFFFF;
+            --text-primary: #1A1F26;
+            --text-secondary: #5F5F5F;
+            --text-muted: #9CA3AF;
+            --border: #E6DDD3;
+            --accent-bg: rgba(0, 217, 168, 0.1);
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            --bg-primary: var(--dark-bg);
+            --bg-secondary: var(--dark-card);
+            --bg-card: var(--dark-card);
+            --text-primary: var(--text-light);
+            --text-secondary: var(--text-grey);
+            --text-muted: var(--text-grey);
+            --border: var(--border-color);
+            --accent-bg: rgba(0, 217, 168, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            background-color: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-md) var(--spacing-xl);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary-green), #008C73);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--dark-bg);
+            font-size: 20px;
+        }
+
+        .nav-brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--primary-green);
+        }
+
+        .theme-icon {
+            font-size: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 84px;
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #008C73 100%);
+            position: relative;
+            overflow: hidden;
+            padding: var(--spacing-2xl) var(--spacing-lg);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-yellow);
+            border-radius: 50%;
+            opacity: 0.15;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-yellow);
+            color: var(--dark-bg);
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .hero-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 800;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: -1.5px;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 300;
+            line-height: 1.5;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-xl);
+        }
+
+        /* Metrics Section */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin: calc(var(--spacing-2xl) * -1) auto var(--spacing-3xl);
+            max-width: 1200px;
+        }
+
+        .metric-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 217, 168, 0.2);
+            border-color: var(--primary-green);
+        }
+
+        .metric-number {
+            font-size: 3em;
+            font-weight: 800;
+            color: var(--primary-green);
+            line-height: 1;
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-top: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto var(--spacing-2xl);
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-yellow));
+            border-radius: 2px;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-3xl);
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-yellow));
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(0, 217, 168, 0.25);
+            border-color: var(--primary-green);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+
+        .service-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            color: var(--primary-green);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-card li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .service-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-green);
+            font-weight: bold;
+        }
+
+        /* Process Section */
+        .process {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-3xl);
+            border: 1px solid var(--border);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-xl);
+        }
+
+        .process-step {
+            text-align: center;
+            padding: var(--spacing-md);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-green), #00B894);
+            color: var(--dark-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .step-description {
+            color: var(--text-muted);
+            font-size: 0.95em;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: linear-gradient(135deg, var(--accent-bg) 0%, transparent 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-2xl);
+            margin-bottom: var(--spacing-3xl);
+            border-left: 5px solid var(--primary-green);
+        }
+
+        .clients-logos {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+
+        .client-logo {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        .client-logo:hover {
+            color: var(--primary-green);
+        }
+
+        /* Bio Section */
+        .bio {
+            background: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            margin: var(--spacing-xl) 0;
+            border: 1px solid var(--border);
+        }
+
+        .bio h3 {
+            color: var(--primary-green);
+            margin-bottom: var(--spacing-md);
+            font-size: 1.6em;
+        }
+
+        .bio-content {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+
+        .bio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .bio-icon {
+            color: var(--primary-green);
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--primary-green), #00B894);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-xl);
+            margin-top: var(--spacing-3xl);
+        }
+
+        .cta-title {
+            font-size: 2em;
+            margin-bottom: var(--spacing-md);
+            font-weight: 700;
+        }
+
+        .cta-text {
+            font-size: 1.1em;
+            margin-bottom: var(--spacing-xl);
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--dark-bg);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05em;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-button-secondary:hover {
+            background: white;
+            color: var(--dark-bg);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-card);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            text-align: center;
+            border: 1px solid var(--border);
+            margin-top: var(--spacing-3xl);
+        }
+
+        .footer-brand {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-green);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .footer-contact a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-contact a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-content {
+                padding: var(--spacing-md);
+            }
+
+            .hero {
+                min-height: 35vh;
+            }
+
+            .container {
+                padding: var(--spacing-xl) var(--spacing-md);
+            }
+
+            .metrics {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="nav-logo">
+                <div class="nav-icon">T</div>
+                <span class="nav-brand">Tresit</span>
+            </a>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                🚀 Consultoría Premium en Transformación Digital
+            </div>
+            <h1 class="hero-title">Del Diagnóstico a la Implementación</h1>
+            <p class="hero-subtitle">
+                Optimizo sus procesos de negocio y construyo las soluciones tecnológicas 
+                que su empresa necesita para crecer y escalar
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Metrics -->
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-number">10+</div>
+                <div class="metric-label">Años de Experiencia</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">50M+</div>
+                <div class="metric-label">Usuarios Impactados</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">99.5%</div>
+                <div class="metric-label">Uptime en Producción</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number">30-40%</div>
+                <div class="metric-label">Reducción de Costos</div>
+            </div>
+        </div>
+
+        <!-- Services Section -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Servicios Integrales</h2>
+                <p class="section-description">
+                    Soluciones end-to-end que transforman la forma en que su empresa opera
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🎯</span>
+                    <h3>Consultoría Estratégica</h3>
+                    <ul>
+                        <li>Diagnóstico de procesos</li>
+                        <li>Identificación de ineficiencias</li>
+                        <li>Roadmap de transformación</li>
+                        <li>Análisis de ROI</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">⚙️</span>
+                    <h3>Implementación</h3>
+                    <ul>
+                        <li>Desarrollo a medida</li>
+                        <li>Sistemas ERP/CRM</li>
+                        <li>Apps móviles y web</li>
+                        <li>Automatización RPA</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">🔄</span>
+                    <h3>Integración</h3>
+                    <ul>
+                        <li>APIs y microservicios</li>
+                        <li>Migración de legacy</li>
+                        <li>Consolidación de datos</li>
+                        <li>Sincronización real-time</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <span class="service-icon">📊</span>
+                    <h3>Optimización</h3>
+                    <ul>
+                        <li>Monitoreo continuo</li>
+                        <li>Auditorías técnicas</li>
+                        <li>Soporte 24/7</li>
+                        <li>Capacitación de equipos</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="process">
+            <h2 class="section-title">Metodología Probada</h2>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Diagnóstico</div>
+                    <div class="step-description">Análisis profundo de procesos actuales</div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Diseño</div>
+                    <div class="step-description">Arquitectura de la solución óptima</div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Desarrollo</div>
+                    <div class="step-description">Implementación ágil y escalable</div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Despliegue</div>
+                    <div class="step-description">Lanzamiento controlado</div>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-title">Optimización</div>
+                    <div class="step-description">Mejora continua</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="experience">
+            <h2 class="section-title">Experiencia Comprobada</h2>
+            <p class="section-description">
+                He liderado transformaciones digitales en algunas de las organizaciones más importantes de América Latina
+            </p>
+            
+            <div class="clients-logos">
+                <div class="client-logo">MercadoLibre</div>
+                <div class="client-logo">BID</div>
+                <div class="client-logo">Cantina Labs</div>
+                <div class="client-logo">Caribou Coffee</div>
+                <div class="client-logo">Principal Financial</div>
+            </div>
+        </section>
+
+        <!-- Bio Section -->
+        <section class="bio">
+            <h3>Ismael Dosil - Fundador y Consultor Principal</h3>
+            
+            <div class="bio-content">
+                <div class="bio-item">
+                    <span class="bio-icon">✓</span>
+                    <span>Software Engineer con +10 años liderando proyectos de transformación digital</span>
+                </div>
+                
+                <div class="bio-item">
+                    <span class="bio-icon">✓</span>
+                    <span>Ex-Technical Lead en MercadoLibre (50M+ usuarios activos)</span>
+                </div>
+                
+                <div class="bio-item">
+                    <span class="bio-icon">✓</span>
+                    <span>Consultor IT para el Banco Interamericano de Desarrollo</span>
+                </div>
+                
+                <div class="bio-item">
+                    <span class="bio-icon">✓</span>
+                    <span>Especialista en arquitecturas escalables y sistemas distribuidos</span>
+                </div>
+                
+                <div class="bio-item">
+                    <span class="bio-icon">✓</span>
+                    <span>Certificaciones: PMP, Scrum Master, Machine Learning</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <h2 class="cta-title">¿Listo para transformar su empresa?</h2>
+            <p class="cta-text">
+                Descubra cómo podemos optimizar sus procesos y reducir costos operativos en un 30-40%
+            </p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="cta-button">
+                    📅 Agendar Consulta Gratuita
+                </a>
+                <a href="#" class="cta-button cta-button-secondary">
+                    📊 Solicitar Diagnóstico
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-brand">Tresit</div>
+            <p>Transformación Digital Integral para Empresas</p>
+            
+            <div class="footer-contact">
+                <a href="mailto:ismael@tresit.com">✉️ ismael@tresit.com</a>
+                <a href="#">📍 Montevideo, Uruguay</a>
+                <a href="#">🌐 Remote Worldwide</a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.theme-icon');
+            icon.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            
+            // Save preference
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-icon').textContent = '☀️';
+            }
+        });
+
+        // Smooth scroll for nav
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav');
+            if (window.pageYOffset > 50) {
+                nav.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

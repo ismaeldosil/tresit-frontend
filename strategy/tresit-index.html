@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tresit - Centro de Documentos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #00D9A8;
+            --primary-yellow: #FFD166;
+            --dark-bg: #0F1419;
+            --dark-card: #1A1F26;
+            --text-light: #E8E8E8;
+            --text-grey: #9CA3AF;
+            --border-color: #2D3748;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0F1419 0%, #1A1F26 100%);
+            color: #E8E8E8;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-green), #00B894);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--dark-bg);
+            box-shadow: 0 10px 40px rgba(0, 217, 168, 0.3);
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            color: var(--text-grey);
+            margin-bottom: 10px;
+        }
+
+        .domain {
+            display: inline-block;
+            background: var(--primary-green);
+            color: var(--dark-bg);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 30px;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-yellow));
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 217, 168, 0.2);
+            border-color: var(--primary-green);
+        }
+
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5em;
+            font-weight: 600;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: var(--text-grey);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: rgba(0, 217, 168, 0.2);
+            color: var(--primary-green);
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--text-light);
+            margin: 60px 0 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-green), var(--primary-yellow));
+            border-radius: 2px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer p {
+            color: var(--text-grey);
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: var(--primary-green);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-yellow);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">T</div>
+            <h1>Tresit</h1>
+            <p class="tagline">Transformación Digital Integral para Empresas</p>
+            <span class="domain">tresit.com</span>
+        </header>
+
+        <h2 class="section-title">📄 Documentos de Marketing</h2>
+        
+        <div class="grid">
+            <a href="tresit-one-pager.html" class="card">
+                <div class="card-icon">📋</div>
+                <div class="card-title">One Pager</div>
+                <p class="card-description">Presentación ejecutiva de servicios con métricas clave, metodología y casos de éxito.</p>
+                <span class="card-badge">HTML - Dark/Light Mode</span>
+            </a>
+
+            <a href="tresit-capability-deck.html" class="card">
+                <div class="card-icon">🎯</div>
+                <div class="card-title">Capability Deck</div>
+                <p class="card-description">Presentación de capacidades en 10 slides interactivos. Ideal para reuniones de venta.</p>
+                <span class="card-badge">Presentación - 10 Slides</span>
+            </a>
+
+            <a href="tresit-propuesta-template.html" class="card">
+                <div class="card-icon">💼</div>
+                <div class="card-title">Template de Propuesta</div>
+                <p class="card-description">Plantilla profesional para propuestas comerciales con secciones de ROI y timeline.</p>
+                <span class="card-badge">Template - Personalizable</span>
+            </a>
+        </div>
+
+        <h2 class="section-title">🚀 Herramientas de Ventas</h2>
+
+        <div class="grid">
+            <a href="tresit-email-templates.md" class="card">
+                <div class="card-icon">📧</div>
+                <div class="card-title">Email Templates</div>
+                <p class="card-description">6 templates de email para cold outreach, follow-ups y nurturing de prospectos.</p>
+                <span class="card-badge">Markdown - 6 Templates</span>
+            </a>
+
+            <a href="tresit-subagentes-guia.md" class="card">
+                <div class="card-icon">🤖</div>
+                <div class="card-title">Guía de Subagentes</div>
+                <p class="card-description">Configuración de 5 agentes especializados en Claude para automatizar operaciones.</p>
+                <span class="card-badge">Guía - Claude AI</span>
+            </a>
+        </div>
+
+        <h2 class="section-title">🎨 Recursos de Marca</h2>
+
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">🎨</div>
+                <div class="card-title">Paleta de Colores</div>
+                <p class="card-description">
+                    <strong>Principal:</strong> #00D9A8 (Verde)<br>
+                    <strong>Secundario:</strong> #FFD166 (Amarillo)<br>
+                    <strong>Dark:</strong> #0F1419 / #1A1F26
+                </p>
+                <span class="card-badge">Brand Guidelines</span>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🔤</div>
+                <div class="card-title">Tipografía</div>
+                <p class="card-description">
+                    <strong>Títulos:</strong> Poppins (700-800)<br>
+                    <strong>Cuerpo:</strong> Inter (400-600)<br>
+                    <strong>Código:</strong> JetBrains Mono
+                </p>
+                <span class="card-badge">Typography</span>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">✉️</div>
+                <div class="card-title">Contacto Profesional</div>
+                <p class="card-description">
+                    <strong>Email:</strong> ismael@tresit.com<br>
+                    <strong>Web:</strong> tresit.com<br>
+                    <strong>LinkedIn:</strong> /in/ismaeldosil
+                </p>
+                <span class="card-badge">Contact Info</span>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p><strong>Tresit</strong> - Transformación Digital Integral</p>
+            <p>Fundador: Ismael Dosil | Ex-MercadoLibre | Ex-BID</p>
+            <div class="footer-links">
+                <a href="mailto:ismael@tresit.com">📧 ismael@tresit.com</a>
+                <a href="#">🌐 tresit.com</a>
+                <a href="#">📍 Montevideo, Uruguay</a>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.9em; opacity: 0.6;">© 2025 Tresit. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>
